@@ -1,7 +1,7 @@
 const Sauce = require('../models/sauce');
 
 exports.creatSauce = (req, res, next) => {
-  const sauceObject = JSON.parse(res.body.sauce);
+  const sauceObject = JSON.parse(req.body.sauce);
   delete sauceObject._id;
   const sauce = new Sauce({
     ...sauceObject,
@@ -21,13 +21,13 @@ exports.updateSauce = (req, res, next) => {
 
 exports.findSauce = (req, res, next) => {
   Sauce.find()
-    .then((sauce) => res.status(200).json({ products: sauce }))
+    .then((sauce) => res.status(200).json(sauce))
     .catch((error) => res.status(400).json({ error }));
 };
 
 exports.findOneSauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })
-    .then((oneSauce) => res.status(200).json({ product: oneSauce }))
+    .then((oneSauce) => res.status(200).json(oneSauce))
     .catch((error) => res.status(404).json({ error }));
 };
 
